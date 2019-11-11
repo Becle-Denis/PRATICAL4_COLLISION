@@ -82,8 +82,6 @@ int main() {
 			npc_point.print();
 		}
 
-		player_point.x = rand() % 10 + 1;
-		player_point.y = rand() % 10 + 1;
 
 		// Circle Collision check
 		if (calculate_hypotenuse(player_circle.p, npc_circle.p) < (player_circle.r + npc_circle.r))
@@ -103,7 +101,25 @@ int main() {
 		player_circle.p.x = rand() % 10 + 1;
 		player_circle.p.y = rand() % 10 + 1;
 
+		// Point Player to Circle NPC Collision check
+		if (calculate_hypotenuse(player_point, npc_circle.p) < (npc_circle.r))
+		{
+			std::cout << "Point to circle Collision" << std::endl;
+			player_point.print();
+			npc_circle.print();
+			std::cin.get();
+		}
+		else
+		{
+			std::cout << "No Collision" << std::endl;
+			player_point.print();
+			npc_circle.print();
+		}
+
+		player_point.x = rand() % 10 + 1;
+		player_point.y = rand() % 10 + 1;
 	}
+
 
 	return 0;
 }
