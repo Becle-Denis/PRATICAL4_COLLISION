@@ -22,6 +22,19 @@ public:
 	}
 };
 
+class Box {
+public:
+	Point p;
+	int width;
+	int height;
+
+	void print()
+	{
+		std::cout << "x:" << p.x << " y:" << p.y << " width:" << width << " height:" << height << std::endl;
+	}
+
+};
+
 int calculate_hypotenuse(Point a, Point b) {
 	int result = 0;
 
@@ -39,6 +52,10 @@ int calculate_hypotenuse(Point a, Point b) {
 	return result;
 }
 
+bool collideBoxToBox(Box a, Box b)
+{
+	return false;
+}
 
 int main() {
 
@@ -63,6 +80,19 @@ int main() {
 	npc_circle.p.x = rand() % 10 + 1;
 	npc_circle.p.y = rand() % 10 + 1;
 	npc_circle.r = rand() % 2 + 1;
+
+	//Box Collision 
+	Box player_box;
+	player_box.p.x = rand() % 10 + 1;
+	player_box.p.y = rand() % 10 + 1;
+	player_box.height = rand() % 3 + 1;
+	player_box.width = rand() % 3 + 1;
+
+	Box npc_box;
+	npc_box.p.x = rand() % 10 + 1;
+	npc_box.p.y = rand() % 10 + 1;
+	npc_box.height = rand() % 3 + 1;
+	npc_box.width = rand() % 3 + 1;
 
 
 	while (true) {
@@ -97,27 +127,51 @@ int main() {
 			player_circle.print();
 			npc_circle.print();
 		}
+		
 
-		player_circle.p.x = rand() % 10 + 1;
-		player_circle.p.y = rand() % 10 + 1;
-
-		// Point Player to Circle NPC Collision check
-		if (calculate_hypotenuse(player_point, npc_circle.p) < (npc_circle.r))
+		// Point NPC to PLayer NPC Collision check
+		if (calculate_hypotenuse(npc_point, player_circle.p) < (player_circle.r))
 		{
 			std::cout << "Point to circle Collision" << std::endl;
-			player_point.print();
-			npc_circle.print();
+			npc_point.print();
+			player_circle.print();
 			std::cin.get();
 		}
 		else
 		{
 			std::cout << "No Collision" << std::endl;
-			player_point.print();
-			npc_circle.print();
+			npc_point.print();
+			player_circle.print();
 		}
 
-		player_point.x = rand() % 10 + 1;
-		player_point.y = rand() % 10 + 1;
+		//Box to Box collision 
+		if (collideBoxToBox(player_box, npc_box))
+		{
+			std::cout << "Box to Box Collision" << std::endl;
+			player_box.print();
+			npc_box.print();
+			std::cin.get();
+		}
+		else
+		{
+			std::cout << "No Collision" << std::endl;
+			player_box.print();
+			npc_box.print();
+		}
+
+		//moving
+		player_circle.p.x = rand() % 10 + 1; // circle X
+		player_circle.p.y = rand() % 10 + 1; // circle Y
+		player_circle.r = rand() % 2 + 1; // circle radius
+
+		player_point.x = rand() % 10 + 1; // point X
+		player_point.y = rand() % 10 + 1; // point Y
+
+		player_box.p.x = rand() % 10 + 1; // box X
+		player_box.p.y = rand() % 10 + 1; // box Y
+		player_box.height = rand() % 3 + 1; // box height
+		player_box.width = rand() % 3 + 1; // box width
+
 	}
 
 
