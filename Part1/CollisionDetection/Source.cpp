@@ -54,7 +54,7 @@ int calculate_hypotenuse(Point a, Point b) {
 
 bool collideBoxToBox(Box a, Box b)
 {
-	return (a.p.x < b.p.x + b.width && a.p.x + a.width > b.p.x && a.p.x + a.width > b.p.x && a.p.y < b.p.y + b.height && a.p.y + a.height > b.p.y);
+	return (a.p.x < b.p.x + b.width && a.p.x + a.width > b.p.x && a.p.x + a.width > b.p.x && a.p.y < b.p.y + b.height && a.p.y + a.height > b.p.y );
 }
 
 int main() {

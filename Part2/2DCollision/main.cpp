@@ -30,6 +30,15 @@ int main()
 		return EXIT_FAILURE;
 	}
 
+	//Settp NPC' s bouding Rectangle
+	sf::RectangleShape bondingRectangleNPC(sf::Vector2f(80,80));
+	bondingRectangleNPC.setOutlineThickness(8);
+	bondingRectangleNPC.setFillColor(sf::Color::Transparent);
+	bondingRectangleNPC.setOutlineColor(sf::Color::Yellow);
+
+
+	
+
 	// Setup NPC's Default Animated Sprite
 	AnimatedSprite npc_animated_sprite(npc_texture);
 	npc_animated_sprite.addFrame(sf::IntRect(3, 3, 84, 84));
@@ -105,6 +114,7 @@ int main()
 		}
 		
 		npc.getAnimatedSprite().setPosition(move_to);
+		bondingRectangleNPC.setPosition(move_to);
 
 		// Update NPC AABB set x and y
 		aabb_npc.min = c2V(
@@ -188,6 +198,9 @@ int main()
 
 		// Draw the NPC's Current Animated Sprite
 		window.draw(npc.getAnimatedSprite());
+
+		// Draw the NPC' s bounding rectangle
+		window.draw(bondingRectangleNPC);
 
 		// Update the window
 		window.display();
