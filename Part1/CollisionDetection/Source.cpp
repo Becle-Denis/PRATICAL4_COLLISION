@@ -52,9 +52,57 @@ int calculate_hypotenuse(Point a, Point b) {
 	return result;
 }
 
+//Check if the point is inside the box
+bool pointInBox(Point p, Box b)
+{
+	return  (p.x >= b.p.x && p.x <= b.p.x + b.width) && (p.y >= b.p.y && p.y <= b.p.y + b.height); 
+}
+
+// check if one or more of the corner of box A are inside the box B
+bool boxAisColllideOrInsideBox(Box a, Box b)
+{
+	
+
+	Point corner;
+	//left bottom corner
+	corner = a.p;
+	if (pointInBox(corner, b))
+	{
+		return true;
+	}
+
+	//left upper corner
+	corner.x = a.p.x + a.width;
+	corner.y = a.p.y;
+	if (pointInBox(corner, b))
+	{
+		return true;
+	}
+
+	//right bottom corner
+	corner.x = a.p.x;
+	corner.y = a.p.y + a.height;
+	if (pointInBox(corner, b))
+	{
+		return true;
+	}
+
+	//right upper corner
+	corner.x = a.p.x + a.width;
+	corner.y = a.p.y + a.height;
+	if (pointInBox(corner, b))
+	{
+		return true;
+	}
+	//no corner
+	return false;
+}
+
+//check if the to box collide
+//One or another is coollide or is inside the other
 bool collideBoxToBox(Box a, Box b)
 {
-	return (a.p.x < b.p.x + b.width && a.p.x + a.width > b.p.x && a.p.x + a.width > b.p.x && a.p.y < b.p.y + b.height && a.p.y + a.height > b.p.y );
+	return boxAisColllideOrInsideBox(a, b) || boxAisColllideOrInsideBox(b, a);
 }
 
 int main() {
