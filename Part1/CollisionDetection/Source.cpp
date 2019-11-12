@@ -61,7 +61,6 @@ bool pointInBox(Point p, Box b)
 // check if one or more of the corner of box A are inside the box B
 bool boxAisColllideOrInsideBox(Box a, Box b)
 {
-	
 
 	Point corner;
 	//left bottom corner
