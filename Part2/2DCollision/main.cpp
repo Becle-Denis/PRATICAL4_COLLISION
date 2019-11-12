@@ -34,7 +34,6 @@ int main()
 	sf::RectangleShape bondingRectangleNPC(sf::Vector2f(80,80));
 	bondingRectangleNPC.setOutlineThickness(8);
 	bondingRectangleNPC.setFillColor(sf::Color::Transparent);
-	bondingRectangleNPC.setOutlineColor(sf::Color::Yellow);
 
 
 	
@@ -114,6 +113,9 @@ int main()
 		}
 		
 		npc.getAnimatedSprite().setPosition(move_to);
+
+		//Update Bounding rectangle 
+		bondingRectangleNPC.setOutlineColor(sf::Color::Yellow);
 		bondingRectangleNPC.setPosition(move_to);
 
 		// Update NPC AABB set x and y
@@ -184,7 +186,9 @@ int main()
 		result = c2AABBtoAABB(aabb_player, aabb_npc);
 		cout << ((result != 0) ? ("Collision") : "") << endl;
 		if (result){
+			//colision
 			player.getAnimatedSprite().setColor(sf::Color(255,0,0));
+			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
 		}
 		else {
 			player.getAnimatedSprite().setColor(sf::Color(0, 255, 0));
