@@ -48,17 +48,11 @@ int main()
 	AnimatedSprite npc_animated_sprite(npc_texture);
 	npc_animated_sprite.addFrame(sf::IntRect(3, 3, 84, 84));
 
-
-	// Setup Players Default Animated Sprite
-	AnimatedSprite player_animated_sprite(player_texture);
-	player_animated_sprite.addFrame(sf::IntRect(3, 3, 84, 84));
-
-
 	// Setup the NPC
 	GameObject &npc = NPC(npc_animated_sprite);
 
 	// Setup the Player
-	GameObject &player = Player(player_animated_sprite);
+	Player &player = Player();
 
 	//Setup NPC AABB
 	c2AABB aabb_npc;
@@ -85,11 +79,12 @@ int main()
 	Circle circle1(sf::Vector2f(600, 300), 50);
 	c2Circle circle_NPC = circle1.getC2Circle();
 
+	/*
 	//Setup Player AABB
 	c2AABB aabb_player;
 	aabb_player.min = c2V(player.getAnimatedSprite().getPosition().x, player.getAnimatedSprite().getPosition().y);
 	aabb_player.max = c2V(player.getAnimatedSprite().getGlobalBounds().width / 6, player.getAnimatedSprite().getGlobalBounds().width / 6);
-
+	*/
 
 	// Initialize Input
 	Input input;
@@ -105,8 +100,10 @@ int main()
 	// Start the game loop
 	while (window.isOpen())
 	{
+		std::cout << "-" << std::endl;
+
 		// Move Sprite Follow Mouse
-		player.getAnimatedSprite().setPosition(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		player.move(sf::Mouse::getPosition(window));
 		
 		// Move The NPC
 		sf::Vector2f move_to(npc.getAnimatedSprite().getPosition().x + direction.x, npc.getAnimatedSprite().getPosition().y + direction.y);
@@ -147,6 +144,7 @@ int main()
 			npc.getAnimatedSprite().getGlobalBounds().height
 		);
 
+		/*
 		// Update Player AABB
 		aabb_player.min = c2V(
 			player.getAnimatedSprite().getPosition().x, 
@@ -158,6 +156,7 @@ int main()
 			player.getAnimatedSprite().getPosition().y + 
 			player.getAnimatedSprite().getGlobalBounds().height
 		);
+		*/
 
 		// Update Capsule 
 		capsuleNPC.setColor(goodColor);
@@ -211,6 +210,7 @@ int main()
 		npc.update();
 
 		// Check for collisions
+		/*/
 		// Colision AABBtoAABB
 		result = c2AABBtoAABB(aabb_player, aabb_npc);
 		cout << ((result != 0) ? ("Collision") : "") << endl;
@@ -222,7 +222,7 @@ int main()
 		else {
 			player.getAnimatedSprite().setColor(sf::Color(0, 255, 0));
 		}
-
+		
 		//Colision  PlayerAABB to Capsule
 		result = c2AABBtoCapsule(aabb_player, cap_NPC);
 		if (result)
@@ -232,6 +232,7 @@ int main()
 			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
 			capsuleNPC.setColor(colisionColor);
 		}
+		*/
 
 		//Colision NPCAABB to Capsule 
 		result = c2AABBtoCapsule(aabb_npc, cap_NPC);
@@ -242,6 +243,7 @@ int main()
 			capsuleNPC.setColor(colisionColor);
 		}
 
+		/*
 		//Colision PLayerAABB to Polygon
 		result = c2AABBtoPoly(aabb_player,&poly_NPC, NULL);
 		if (result)
@@ -250,7 +252,7 @@ int main()
 			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
 			poly.setColor(colisionColor);
 		}
-
+		*/
 		//Colision NPCAABB to polygon 
 		result = c2AABBtoPoly(aabb_npc, &poly_NPC, NULL);
 		if (result)
@@ -259,7 +261,7 @@ int main()
 			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
 			poly.setColor(colisionColor);
 		}
-
+		/*
 		//Colision PLayerAABB to Ray
 		result = c2RaytoAABB(ray1_NPC,aabb_player, ptr_rayResult);
 		if (result)
@@ -268,7 +270,7 @@ int main()
 			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
 			ray1.setColor(colisionColor);
 		}
-
+		*/
 		//Colision NPCAABB to Ray 
 		result = c2RaytoAABB(ray1_NPC, aabb_npc, ptr_rayResult);
 		if (result)
@@ -277,7 +279,7 @@ int main()
 			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
 			ray1.setColor(colisionColor);
 		}
-
+		/*
 		//Colision PLayerAABB to Circle
 		result = c2CircletoAABB(circle_NPC,aabb_player);
 		if (result)
@@ -286,7 +288,7 @@ int main()
 			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
 			circle1.setColor(colisionColor);
 		}
-
+		*/
 		//Colision NPCAABB to Circle 
 		result = c2CircletoAABB(circle_NPC, aabb_npc);
 		if (result)
@@ -300,7 +302,7 @@ int main()
 		window.clear();
 
 		// Draw the Players Current Animated Sprite
-		window.draw(player.getAnimatedSprite());
+		player.render(window);
 
 		// Draw the NPC's Current Animated Sprite
 		window.draw(npc.getAnimatedSprite());

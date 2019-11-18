@@ -2,6 +2,7 @@
 #define PLAYER_FSM_H
 
 #include "Input.h"
+#include <SFML/Graphics.hpp>
 
 class PlayerFSM
 {
@@ -23,6 +24,11 @@ public:
 	State* getPrevious();
 	
 	void handleInput(Input in);
+
+	void update();
+	void move(sf::Vector2i newPosition);
+
+	void render(sf::RenderWindow& window);
 
 // Try uncommenting and comment the declaration above
 //private:

@@ -12,19 +12,19 @@
 class State
 {
 public:
-	virtual void handleInput(Input in) {}
+	virtual void handleInput(Input in, PlayerFSM* a) {}
 
-	virtual void update() {}
+	virtual void update(PlayerFSM* a) {}
 
-	virtual void square() {}
+	virtual void square(PlayerFSM* a) {}
 
-	virtual void cirle() {}
+	virtual void cirle(PlayerFSM* a) {}
 
-	virtual void ray() {}
+	virtual void ray(PlayerFSM* a) {}
 
 	virtual void impact() {}
 
-	void render(sf::RenderWindow& window) {};
+	virtual void render(sf::RenderWindow& window) {};
 };
 
 #endif // ! ANIMATION_H

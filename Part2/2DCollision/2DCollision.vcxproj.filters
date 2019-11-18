@@ -90,6 +90,15 @@
     <ClInclude Include="Polygon.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="CircleState.h">
+      <Filter>Header Files\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareState.h">
+      <Filter>Header Files\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="RayState.h">
+      <Filter>Header Files\FSM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -124,6 +133,15 @@
     </ClCompile>
     <ClCompile Include="Ray.cpp">
       <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleState.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="RayState.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="SquareState.cpp">
+      <Filter>Source Files\FSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

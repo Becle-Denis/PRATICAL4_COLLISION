@@ -22,12 +22,15 @@
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Capsule.h" />
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="CircleState.h" />
     <ClInclude Include="PlayerFSM.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="RayState.h" />
+    <ClInclude Include="SquareState.h" />
     <ClInclude Include="tinyc2.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="GameObject.h" />
@@ -37,6 +40,7 @@
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Capsule.cpp" />
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="CircleState.cpp" />
     <ClCompile Include="PlayerFSM.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -45,6 +49,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RayState.cpp" />
+    <ClCompile Include="SquareState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
