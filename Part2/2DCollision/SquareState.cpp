@@ -4,6 +4,14 @@
 
 void SquareState::handleInput(Input in, PlayerFSM* a)
 {
+	if (in.getCurrent() == Input::LEFT)
+	{
+		cirle(a);
+	}
+	else if (in.getCurrent() == Input::RIGHT)
+	{
+		ray(a);
+	}
 }
 
 void SquareState::update(PlayerFSM* a)

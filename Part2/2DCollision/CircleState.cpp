@@ -4,6 +4,14 @@
 
 void CircleState::handleInput(Input in, PlayerFSM* a)
 {
+	if (in.getCurrent() == Input::LEFT)
+	{
+		ray(a);
+	}
+	else if (in.getCurrent() == Input::RIGHT)
+	{
+		square(a);
+	}
 }
 
 void CircleState::update(PlayerFSM* a)

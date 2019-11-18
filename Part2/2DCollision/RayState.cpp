@@ -4,6 +4,14 @@
 
 void RayState::handleInput(Input in, PlayerFSM* a)
 {
+	if (in.getCurrent() == Input::LEFT)
+	{
+		square(a);
+	}
+	else if (in.getCurrent() == Input::RIGHT)
+	{
+		cirle(a);
+	}
 }
 
 void RayState::update(PlayerFSM* a)
