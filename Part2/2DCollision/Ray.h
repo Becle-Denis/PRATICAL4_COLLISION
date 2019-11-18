@@ -16,6 +16,7 @@ public:
 	c2Ray getC2Ray();
 	void setColor(sf::Color color);
 	void render(sf::RenderWindow& window);
+	void move(sf::Vector2i position);
 };
 
 #endif // !RAY_H

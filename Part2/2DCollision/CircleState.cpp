@@ -2,8 +2,9 @@
 #include "SquareState.h"
 #include "RayState.h"
 
-CircleState::CircleState() : circle(sf::Vector2f(0, 0),50)
+CircleState::CircleState() : circle(sf::Vector2f(-100, -100),50)
 {
+
 }
 
 void CircleState::handleInput(Input in, PlayerFSM* a)

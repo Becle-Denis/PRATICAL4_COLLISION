@@ -27,3 +27,8 @@ void Ray::render(sf::RenderWindow& window)
 {
 	window.draw(shape);
 }
+
+void Ray::move(sf::Vector2i position)
+{
+	shape.setPosition(sf::Vector2f(position.x, position.y));
+}
