@@ -65,20 +65,29 @@ int main()
 		npc.getAnimatedSprite().getGlobalBounds().height);
 
 	//Setup NPC Capsule 
-	int capsuleRadius = 50;
-	int capsuleHieght = 100;
-	sf::Vector2f capsulePosition(125,150);
 	c2Capsule cap_NPC;
+	int capsuleRadius = 50;
+	int capsuleHeight = 100;
+	sf::Vector2f capsulePosition(200,400);
+	
+		//C2
+	c2v capsulea;
+	c2v capsuleb;
+	capsulea.x = capsulePosition.x + capsuleRadius;
+	capsulea.y = capsulePosition.y;
+	capsuleb.x = capsulePosition.x + capsuleRadius;
+	capsuleb.y = capsulePosition.y + capsuleHeight;
+	cap_NPC.a = capsulea;
+	cap_NPC.b = capsuleb;
+	cap_NPC.r = capsuleRadius;
 
-	RectangleShape capsuleShape1Rect(sf::Vector2f(2 * capsuleRadius, capsuleHieght));
+		//Shapes
+	RectangleShape capsuleShape1Rect(sf::Vector2f(2 * capsuleRadius, capsuleHeight));
 	CircleShape capsuleShape2Circ(capsuleRadius);
 	CircleShape capsuleShape3Circ(capsuleRadius);
 	capsuleShape1Rect.setPosition(capsulePosition);
 	capsuleShape2Circ.setPosition(sf::Vector2f(capsulePosition.x, capsulePosition.y - capsuleRadius));
-	capsuleShape3Circ.setPosition(sf::Vector2f(capsulePosition.x, capsulePosition.y  + capsuleHieght - capsuleRadius));
-	capsuleShape1Rect.setFillColor(goodColor);
-	capsuleShape2Circ.setFillColor(goodColor);
-	capsuleShape3Circ.setFillColor(goodColor);
+	capsuleShape3Circ.setPosition(sf::Vector2f(capsulePosition.x, capsulePosition.y  + capsuleHeight - capsuleRadius));
 
 	//Setup Player AABB
 	c2AABB aabb_player;
@@ -152,6 +161,11 @@ int main()
 			player.getAnimatedSprite().getGlobalBounds().height
 		);
 
+		// Update Capsule 
+		capsuleShape1Rect.setFillColor(goodColor);
+		capsuleShape2Circ.setFillColor(goodColor);
+		capsuleShape3Circ.setFillColor(goodColor);
+
 		// Process events
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -192,6 +206,7 @@ int main()
 		npc.update();
 
 		// Check for collisions
+		// Colision AABBtoAABB
 		result = c2AABBtoAABB(aabb_player, aabb_npc);
 		cout << ((result != 0) ? ("Collision") : "") << endl;
 		if (result){
@@ -202,6 +217,20 @@ int main()
 		else {
 			player.getAnimatedSprite().setColor(sf::Color(0, 255, 0));
 		}
+
+		//Colision  PlayerAABBtoCapsule
+		result = c2AABBtoCapsule(aabb_player, cap_NPC);
+		if (result)
+		{
+			//colision 
+			std::cout << "Colision";
+			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
+			capsuleShape1Rect.setFillColor(colisionColor);
+			capsuleShape2Circ.setFillColor(colisionColor);
+			capsuleShape3Circ.setFillColor(colisionColor);
+		}
+
+
 
 		// Clear screen
 		window.clear();
