@@ -143,9 +143,19 @@ class Circle
 	CircleShape shape;
 
 public:
-	Circle(sf::Vector2f position, int radius) : shape(radius)
+	Circle(sf::Vector2f position, float radius) : shape(radius)
 	{
+		shape.setOrigin(sf::Vector2f(radius, radius));
 		shape.setPosition(position);
+	}
+
+	c2Circle getC2Circle()
+	{
+		sf::Vector2f position = shape.getPosition();
+		c2Circle c;
+		c.p = c2V(position.x, position.y);
+		c.r = shape.getRadius();
+		return c;
 	}
 
 	void setColor(sf::Color color)
@@ -227,6 +237,7 @@ int main()
 
 	//Setup the NPC Cirlce
 	Circle circle1(sf::Vector2f(600, 300), 50);
+	c2Circle circle_NPC = circle1.getC2Circle();
 
 	//Setup Player AABB
 	c2AABB aabb_player;
@@ -419,6 +430,24 @@ int main()
 			std::cout << "Colision";
 			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
 			ray1.setColor(colisionColor);
+		}
+
+		//Colision PLayerAABB to Circle
+		result = c2CircletoAABB(circle_NPC,aabb_player);
+		if (result)
+		{
+			std::cout << "Colision";
+			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
+			circle1.setColor(colisionColor);
+		}
+
+		//Colision NPCAABB to Circle 
+		result = c2CircletoAABB(circle_NPC, aabb_npc);
+		if (result)
+		{
+			std::cout << "Colision";
+			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
+			circle1.setColor(colisionColor);
 		}
 
 		// Clear screen
