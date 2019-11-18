@@ -137,20 +137,6 @@ int main()
 			npc.getAnimatedSprite().getGlobalBounds().height
 		);
 
-		/*
-		// Update Player AABB
-		aabb_player.min = c2V(
-			player.getAnimatedSprite().getPosition().x, 
-			player.getAnimatedSprite().getPosition().y
-		);
-		aabb_player.max = c2V(
-			player.getAnimatedSprite().getPosition().x +
-			player.getAnimatedSprite().getGlobalBounds().width, 
-			player.getAnimatedSprite().getPosition().y + 
-			player.getAnimatedSprite().getGlobalBounds().height
-		);
-		*/
-
 		// Update Capsule 
 		capsuleNPC.setColor(goodColor);
 

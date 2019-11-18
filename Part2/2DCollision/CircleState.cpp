@@ -50,7 +50,6 @@ void CircleState::move(sf::Vector2i newPosition)
 
 void CircleState::render(sf::RenderWindow& window)
 {
-	std::cout << "Circle" << std::endl;
 	circle.render(window);
 }
 

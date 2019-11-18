@@ -56,7 +56,6 @@ void SquareState::impact()
 void SquareState::render(sf::RenderWindow& window)
 {
 	window.draw(shape);
-	std::cout << "Square" << std::endl;
 }
 
 int SquareState::colideWithAABB(c2AABB& aabb)

@@ -49,7 +49,6 @@ void RayState::move(sf::Vector2i position)
 
 void RayState::render(sf::RenderWindow& window)
 {
-	std::cout << "Ray" << std::endl;
 	ray.render(window);
 }
 
