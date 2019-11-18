@@ -7,7 +7,7 @@
 class SquareState : public State
 {
 private:
-
+	sf::RectangleShape shape;
 public:
 	SquareState();
 
@@ -18,6 +18,8 @@ public:
 	void cirle(PlayerFSM* a) override;
 
 	void ray(PlayerFSM* a) override;
+
+	void move(sf::Vector2i position) override;
 
 	void impact() override;
 

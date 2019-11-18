@@ -2,8 +2,9 @@
 #include "RayState.h"
 #include "CircleState.h"
 
-SquareState::SquareState()
+SquareState::SquareState() : shape(sf::Vector2f(70,70))
 {
+
 }
 
 void SquareState::handleInput(Input in, PlayerFSM* a)
@@ -20,6 +21,7 @@ void SquareState::handleInput(Input in, PlayerFSM* a)
 
 void SquareState::update(PlayerFSM* a)
 {
+	shape.setFillColor(sf::Color::Green);
 }
 
 
@@ -37,11 +39,18 @@ void SquareState::ray(PlayerFSM* a)
 	a->setCurrent(new RayState());
 }
 
+void SquareState::move(sf::Vector2i position)
+{
+	shape.setPosition(sf::Vector2f(position.x,position.y));
+}
+
 void SquareState::impact()
 {
+	shape.setFillColor(sf::Color::Red);
 }
 
 void SquareState::render(sf::RenderWindow& window)
 {
+	window.draw(shape);
 	std::cout << "Square" << std::endl;
 }
