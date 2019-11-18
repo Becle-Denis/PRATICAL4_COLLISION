@@ -52,3 +52,38 @@ void RayState::render(sf::RenderWindow& window)
 	std::cout << "Ray" << std::endl;
 	ray.render(window);
 }
+
+int RayState::colideWithAABB(c2AABB& aabb)
+{
+	c2Raycast rayCast;
+	c2Raycast* ptrRay = &rayCast;
+	return c2RaytoAABB(ray.getC2Ray(), aabb, ptrRay);
+}
+
+int RayState::colideWithCapsule(Capsule& cap)
+{
+	c2Raycast rayCast;
+	c2Raycast* ptrRay = &rayCast;
+	return c2RaytoCapsule(ray.getC2Ray(), cap.getC2Capsule(), ptrRay);
+}
+
+int RayState::colideWithPolygon(Polygon& pol)
+{
+	c2Raycast rayCast;
+	c2Raycast* ptrRay = &rayCast;
+	return 0;
+}
+
+int RayState::colideWithCircle(Circle& cir)
+{
+	c2Raycast rayCast;
+	c2Raycast* ptrRay = &rayCast;
+	return c2RaytoCircle(ray.getC2Ray(), cir.getC2Circle(), ptrRay);
+}
+
+int RayState::colideWithRay(Ray& ray)
+{
+	c2Raycast rayCast;
+	c2Raycast* ptrRay = &rayCast;
+	return 0;
+}
