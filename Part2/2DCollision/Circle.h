@@ -16,6 +16,8 @@ public:
 	void setColor(sf::Color color);
 
 	void render(sf::RenderWindow& window);
+
+	void move(sf::Vector2i position);
 };
 
 #endif // !CIRCLE_H

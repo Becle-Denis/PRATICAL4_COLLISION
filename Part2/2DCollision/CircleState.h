@@ -6,8 +6,9 @@
 
 class CircleState : public State
 {
-	//Circle circle;
+	Circle circle;
 public:
+	CircleState();
 
 	void handleInput(Input in, PlayerFSM* a) override;
 
@@ -18,6 +19,8 @@ public:
 	void ray(PlayerFSM* a) override;
 
 	void impact() override;
+
+	void move(sf::Vector2i newPosition) override;
 
 	void render(sf::RenderWindow& window) override;
 };

@@ -40,7 +40,7 @@ void PlayerFSM::update()
 
 void PlayerFSM::move(sf::Vector2i newPosition)
 {
-	
+	m_current->move(newPosition);
 }
 
 void PlayerFSM::render(sf::RenderWindow& window)

@@ -24,6 +24,8 @@ public:
 
 	virtual void impact() {}
 
+	virtual void move(sf::Vector2i newPosition) {};
+
 	virtual void render(sf::RenderWindow& window) {};
 };
 
