@@ -61,6 +61,41 @@ public:
 	}
 };
 
+class Polygon
+{
+private:
+	std::vector<sf::Vector2f> m_points;
+	sf::ConvexShape shape;
+
+public:
+	Polygon(std::vector<sf::Vector2f> points) : m_points(points)
+	{
+		shape.setPointCount(m_points.size());
+		for (int i = 0; i < m_points.size(); i++)
+		{
+			shape.setPoint(i, m_points.at(i));
+		}
+	}
+	/*
+	c2Poly getC2Poly()
+	{
+		c2Poly p;
+		return p;
+	} 
+	*/
+
+	void setColor(sf::Color color)
+	{
+		shape.setFillColor(color);
+	}
+
+	void render(sf::RenderWindow& window)
+	{
+		window.draw(shape);
+	}
+};
+
+
 int main()
 {
 	// Create the main window
@@ -117,6 +152,10 @@ int main()
 	//Setup NPC Capsule 
 	Capsule capsuleNPC(50,100,sf::Vector2f(200,400));
 	c2Capsule cap_NPC = capsuleNPC.getC2Capsule();
+
+	//Setup NPC Polygon
+	Polygon poly({ sf::Vector2f(100,210),sf::Vector2f(253,300),sf::Vector2f(222,212) });
+	//c2Poly poly_NPC = poly.getC2Poly();
 
 	//Setup Player AABB
 	c2AABB aabb_player;
@@ -192,6 +231,9 @@ int main()
 
 		// Update Capsule 
 		capsuleNPC.setColor(goodColor);
+
+		// Update Polyone 
+		poly.setColor(goodColor);
 
 		// Process events
 		sf::Event event;
@@ -276,9 +318,11 @@ int main()
 		// Draw the NPC' s bounding rectangle
 		window.draw(bondingRectangleNPC);
 
-
 		//Draw the NPC Capsule
 		capsuleNPC.render(window);
+
+		//draw the NPC polygon
+		poly.render(window);
 
 		// Update the window
 		window.display();
