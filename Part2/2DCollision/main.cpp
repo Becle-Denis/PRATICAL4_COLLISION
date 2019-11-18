@@ -30,31 +30,24 @@ int main()
 		return EXIT_FAILURE;
 	}
 
+	//Color variable 
+	sf::Color goodColor = sf::Color(125, 125, 255);
+	sf::Color colisionColor = sf::Color(255, 200, 150);
+
 	//Settp NPC' s bouding Rectangle
 	sf::RectangleShape bondingRectangleNPC(sf::Vector2f(80,80));
 	bondingRectangleNPC.setOutlineThickness(8);
 	bondingRectangleNPC.setFillColor(sf::Color::Transparent);
 
-
-	
-
 	// Setup NPC's Default Animated Sprite
 	AnimatedSprite npc_animated_sprite(npc_texture);
 	npc_animated_sprite.addFrame(sf::IntRect(3, 3, 84, 84));
-	npc_animated_sprite.addFrame(sf::IntRect(88, 3, 84, 84));
-	npc_animated_sprite.addFrame(sf::IntRect(173, 3, 84, 84));
-	npc_animated_sprite.addFrame(sf::IntRect(258, 3, 84, 84));
-	npc_animated_sprite.addFrame(sf::IntRect(343, 3, 84, 84));
-	npc_animated_sprite.addFrame(sf::IntRect(428, 3, 84, 84));
+
 
 	// Setup Players Default Animated Sprite
 	AnimatedSprite player_animated_sprite(player_texture);
 	player_animated_sprite.addFrame(sf::IntRect(3, 3, 84, 84));
-	player_animated_sprite.addFrame(sf::IntRect(88, 3, 84, 84));
-	player_animated_sprite.addFrame(sf::IntRect(173, 3, 84, 84));
-	player_animated_sprite.addFrame(sf::IntRect(258, 3, 84, 84));
-	player_animated_sprite.addFrame(sf::IntRect(343, 3, 84, 84));
-	player_animated_sprite.addFrame(sf::IntRect(428, 3, 84, 84));
+
 
 	// Setup the NPC
 	GameObject &npc = NPC(npc_animated_sprite);
@@ -70,6 +63,22 @@ int main()
 		npc.getAnimatedSprite().getGlobalBounds().width, 
 		npc.getAnimatedSprite().getPosition().y +
 		npc.getAnimatedSprite().getGlobalBounds().height);
+
+	//Setup NPC Capsule 
+	int capsuleRadius = 50;
+	int capsuleHieght = 100;
+	sf::Vector2f capsulePosition(125,150);
+	c2Capsule cap_NPC;
+
+	RectangleShape capsuleShape1Rect(sf::Vector2f(2 * capsuleRadius, capsuleHieght));
+	CircleShape capsuleShape2Circ(capsuleRadius);
+	CircleShape capsuleShape3Circ(capsuleRadius);
+	capsuleShape1Rect.setPosition(capsulePosition);
+	capsuleShape2Circ.setPosition(sf::Vector2f(capsulePosition.x, capsulePosition.y - capsuleRadius));
+	capsuleShape3Circ.setPosition(sf::Vector2f(capsulePosition.x, capsulePosition.y  + capsuleHieght - capsuleRadius));
+	capsuleShape1Rect.setFillColor(goodColor);
+	capsuleShape2Circ.setFillColor(goodColor);
+	capsuleShape3Circ.setFillColor(goodColor);
 
 	//Setup Player AABB
 	c2AABB aabb_player;
@@ -205,6 +214,12 @@ int main()
 
 		// Draw the NPC' s bounding rectangle
 		window.draw(bondingRectangleNPC);
+
+
+		//Draw the NPC Capsule
+		window.draw(capsuleShape1Rect);
+		window.draw(capsuleShape2Circ);
+		window.draw(capsuleShape3Circ);
 
 		// Update the window
 		window.display();
