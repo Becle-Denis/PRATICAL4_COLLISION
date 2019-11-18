@@ -48,3 +48,33 @@ void PlayerFSM::render(sf::RenderWindow& window)
 	m_current->render(window);
 }
 
+int PlayerFSM::colideWithAABB(c2AABB& aabb)
+{
+	return m_current->colideWithAABB(aabb);
+}
+
+int PlayerFSM::colideWithCapsule(Capsule& cap)
+{
+	return m_current->colideWithCapsule(cap);
+}
+
+int PlayerFSM::colideWithPolygon(Polygon& pol)
+{
+	return m_current->colideWithPolygon(pol);
+}
+
+int PlayerFSM::colideWithCircle(Circle& cir)
+{
+	return m_current->colideWithCircle(cir);
+}
+
+int PlayerFSM::colideWithRay(Ray& ray)
+{
+	return m_current->colideWithRay(ray);
+}
+
+void PlayerFSM::hit()
+{
+	m_current->impact();
+}
+

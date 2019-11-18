@@ -48,3 +48,34 @@ void Player::render(sf::RenderWindow& window)
 {
 	m_player_fsm.render(window);
 }
+
+int Player::colideWithAABB(c2AABB& aabb)
+{
+	return m_player_fsm.colideWithAABB(aabb);
+}
+
+int Player::colideWithCapsule(Capsule& cap)
+{
+	return m_player_fsm.colideWithCapsule(cap);
+}
+
+int Player::colideWithPolygon(Polygon& pol)
+{
+	return m_player_fsm.colideWithPolygon(pol);
+}
+
+int Player::colideWithCircle(Circle& cir)
+{
+	return m_player_fsm.colideWithCircle(cir);
+}
+
+int Player::colideWithRay(Ray& ray)
+{
+	return m_player_fsm.colideWithRay(ray);
+}
+
+void Player::hit()
+{
+	m_player_fsm.hit();
+}
+

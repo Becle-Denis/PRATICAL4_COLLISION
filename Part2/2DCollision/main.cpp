@@ -298,6 +298,37 @@ int main()
 			circle1.setColor(colisionColor);
 		}
 
+		//Colision 
+		if (player.colideWithAABB(aabb_npc))
+		{
+			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
+			player.hit();
+		}
+
+		if (player.colideWithCapsule(capsuleNPC))
+		{
+			capsuleNPC.setColor(colisionColor);
+			player.hit();
+		}
+
+		if (player.colideWithCircle(circle1))
+		{
+			circle1.setColor(colisionColor);
+			player.hit();
+		}
+
+		if (player.colideWithPolygon(poly))
+		{
+			poly.setColor(colisionColor);
+			player.hit();
+		}
+
+		if (player.colideWithRay(ray1))
+		{
+			ray1.setColor(colisionColor);
+			player.hit();
+		}
+
 		// Clear screen
 		window.clear();
 

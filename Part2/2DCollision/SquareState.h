@@ -2,10 +2,15 @@
 #define SQUARESTATE_H
 
 #include <State.h>
+#include "Polygon.h"
 
 class SquareState : public State
 {
+private:
+
 public:
+	SquareState();
+
 	void handleInput(Input in, PlayerFSM* a) override;
 
 	void update(PlayerFSM* a) override;

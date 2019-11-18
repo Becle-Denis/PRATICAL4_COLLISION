@@ -53,3 +53,30 @@ void CircleState::render(sf::RenderWindow& window)
 	std::cout << "Circle" << std::endl;
 	circle.render(window);
 }
+
+int CircleState::colideWithAABB(c2AABB& aabb)
+{
+	return c2CircletoAABB(circle.getC2Circle(),aabb);
+}
+
+int CircleState::colideWithCapsule(Capsule& cap)
+{
+	return c2CircletoCapsule(circle.getC2Circle(),cap.getC2Capsule());
+}
+
+int CircleState::colideWithPolygon(Polygon& pol)
+{
+	return c2CircletoPoly(circle.getC2Circle(),&(pol.getC2Poly()),NULL);
+}
+
+int CircleState::colideWithCircle(Circle& cir)
+{
+	return c2CircletoCircle(circle.getC2Circle(),cir.getC2Circle());
+}
+
+int CircleState::colideWithRay(Ray& ray)
+{
+	c2Raycast rayCast;
+	c2Raycast* ptrRay = &rayCast;
+	return c2RaytoCircle(ray.getC2Ray(),circle.getC2Circle(),ptrRay);
+}

@@ -2,6 +2,10 @@
 #include "RayState.h"
 #include "CircleState.h"
 
+SquareState::SquareState()
+{
+}
+
 void SquareState::handleInput(Input in, PlayerFSM* a)
 {
 	if (in.getCurrent() == Input::LEFT)
