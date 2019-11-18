@@ -138,6 +138,27 @@ public:
 	}
 };
 
+class Circle
+{
+	CircleShape shape;
+
+public:
+	Circle(sf::Vector2f position, int radius) : shape(radius)
+	{
+		shape.setPosition(position);
+	}
+
+	void setColor(sf::Color color)
+	{
+		shape.setFillColor(color);
+	}
+
+	void render(sf::RenderWindow& window)
+	{
+		window.draw(shape);
+	}
+};
+
 
 int main()
 {
@@ -203,6 +224,9 @@ int main()
 	//Setup the NPC Ray
 	Ray ray1(sf::Vector2f(500,50),200,30);
 	c2Ray ray1_NPC = ray1.getC2Ray();
+
+	//Setup the NPC Cirlce
+	Circle circle1(sf::Vector2f(600, 300), 50);
 
 	//Setup Player AABB
 	c2AABB aabb_player;
@@ -286,6 +310,9 @@ int main()
 
 		// Update Ray
 		ray1.setColor(goodColor);
+
+		// Update Circle
+		circle1.setColor(goodColor);
 
 		// Process events
 		sf::Event event;
@@ -414,6 +441,9 @@ int main()
 
 		//draw the NPC Ray
 		ray1.render(window);
+
+		//draw the NPC Circle
+		circle1.render(window);
 
 		// Update the window
 		window.display();
