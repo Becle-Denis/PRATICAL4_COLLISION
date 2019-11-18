@@ -7,26 +7,24 @@
 #include <Input.h>
 #include <PlayerFSM.h>
 #include <Debug.h>
+#include <SFML/Graphics.hpp>
 
 class State
 {
 public:
-	virtual void handleInput() {}
+	virtual void handleInput(Input in) {}
 
 	virtual void update() {}
 
-	virtual void idle(PlayerFSM* a)
-	{
-		DEBUG_MSG("State::Idling");
-	}
-	virtual void jumping(PlayerFSM* a)
-	{
-		DEBUG_MSG("State::Jumping");
-	}
-	virtual void climbing(PlayerFSM* a)
-	{
-		DEBUG_MSG("State::Climbing");
-	}
+	virtual void square() {}
+
+	virtual void cirle() {}
+
+	virtual void ray() {}
+
+	virtual void impact() {}
+
+	void render(sf::RenderWindow& window) {};
 };
 
 #endif // ! ANIMATION_H

@@ -1,6 +1,8 @@
 #ifndef PLAYER_FSM_H
 #define PLAYER_FSM_H
 
+#include "Input.h"
+
 class PlayerFSM
 {
 
@@ -20,9 +22,7 @@ public:
 	State* getCurrent();
 	State* getPrevious();
 	
-	void idle();
-	void jumping();
-	void climbing();
+	void handleInput(Input in);
 
 // Try uncommenting and comment the declaration above
 //private:
