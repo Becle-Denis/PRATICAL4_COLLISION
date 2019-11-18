@@ -116,6 +116,16 @@ public:
 		shape.rotate(rotation);
 	}
 
+	c2Ray getC2Ray()
+	{
+		sf::Vector2f position = shape.getPosition();
+		c2Ray r;
+		r.p = c2V(position.x,position.y);
+		r.d = c2Norm(c2V(cos(m_rotation * 0.01745329252),sin(m_rotation * 0.01745329252)));
+		r.t = m_length;
+		return r;
+	}
+
 
 	void setColor(sf::Color color)
 	{
@@ -133,7 +143,7 @@ int main()
 {
 	// Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
-
+	
 	// Load a NPC's sprites to display
 	sf::Texture npc_texture;
 	if (!npc_texture.loadFromFile("assets\\grid.png")) {
@@ -191,7 +201,8 @@ int main()
 	c2Poly poly_NPC = poly.getC2Poly();
 
 	//Setup the NPC Ray
-	Ray ray(sf::Vector2f(500,50),200,30);
+	Ray ray1(sf::Vector2f(500,50),200,30);
+	c2Ray ray1_NPC = ray1.getC2Ray();
 
 	//Setup Player AABB
 	c2AABB aabb_player;
@@ -204,6 +215,8 @@ int main()
 
 	// Collision result
 	int result = 0;
+	c2Raycast rayResult;
+	c2Raycast* ptr_rayResult = &rayResult;
 
 	// Direction of movement of NPC
 	sf::Vector2f direction(0.1f, 0.2f);
@@ -272,7 +285,7 @@ int main()
 		poly.setColor(goodColor);
 
 		// Update Ray
-		ray.setColor(goodColor);
+		ray1.setColor(goodColor);
 
 		// Process events
 		sf::Event event;
@@ -363,6 +376,24 @@ int main()
 			poly.setColor(colisionColor);
 		}
 
+		//Colision PLayerAABB to Ray
+		result = c2RaytoAABB(ray1_NPC,aabb_player, ptr_rayResult);
+		if (result)
+		{
+			std::cout << "Colision";
+			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
+			ray1.setColor(colisionColor);
+		}
+
+		//Colision NPCAABB to Ray 
+		result = c2RaytoAABB(ray1_NPC, aabb_npc, ptr_rayResult);
+		if (result)
+		{
+			std::cout << "Colision";
+			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
+			ray1.setColor(colisionColor);
+		}
+
 		// Clear screen
 		window.clear();
 
@@ -382,7 +413,7 @@ int main()
 		poly.render(window);
 
 		//draw the NPC Ray
-		ray.render(window);
+		ray1.render(window);
 
 		// Update the window
 		window.display();
