@@ -1,16 +1,22 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#define TINYC2_IMPL
-#include <tinyc2.h>
 #include <AnimatedSprite.h>
 #include <GameObject.h>
 #include <Player.h>
 #include <NPC.h>
 #include <Input.h>
 #include <Debug.h>
+#include <Capsule.h>
+#include <Circle.h>
+#include <Polygon.h>
+#include <Ray.h>
+
+#define TINYC2_IMPL
+#include <tinyc2.h>
 
 using namespace std;
 
+/*
 class Capsule {
 public: 
 	int m_radius;
@@ -169,7 +175,7 @@ public:
 	}
 };
 
-
+*/
 int main()
 {
 	// Create the main window

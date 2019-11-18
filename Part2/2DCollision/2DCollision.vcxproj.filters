@@ -46,6 +46,9 @@
     <Filter Include="Header Files\Collision">
       <UniqueIdentifier>{c8ab608c-0471-44ea-baa7-5f46d9db0a7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Collision">
+      <UniqueIdentifier>{e484b4f4-d6de-44e5-8258-ed9c51895cbc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h">
@@ -84,6 +87,18 @@
     <ClInclude Include="PlayerFSM.h">
       <Filter>Header Files\FSM</Filter>
     </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Capsule.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Polygon.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -115,6 +130,18 @@
     </ClCompile>
     <ClCompile Include="PlayerFSM.cpp">
       <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Capsule.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Polygon.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>Source Files\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
