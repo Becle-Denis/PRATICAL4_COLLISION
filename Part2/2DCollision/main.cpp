@@ -76,13 +76,19 @@ public:
 			shape.setPoint(i, m_points.at(i));
 		}
 	}
-	/*
+	
 	c2Poly getC2Poly()
 	{
 		c2Poly p;
+		p.count = m_points.size();
+		for (int i = 0; i < m_points.size(); i++)
+		{
+			p.verts[i] = c2V(m_points.at(i).x, m_points.at(i).y);
+		}
+		c2MakePoly(&p);
 		return p;
 	} 
-	*/
+	
 
 	void setColor(sf::Color color)
 	{
@@ -155,7 +161,7 @@ int main()
 
 	//Setup NPC Polygon
 	Polygon poly({ sf::Vector2f(100,210),sf::Vector2f(253,300),sf::Vector2f(222,212) });
-	//c2Poly poly_NPC = poly.getC2Poly();
+	c2Poly poly_NPC = poly.getC2Poly();
 
 	//Setup Player AABB
 	c2AABB aabb_player;
@@ -304,6 +310,24 @@ int main()
 			std::cout << "Colision";
 			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
 			capsuleNPC.setColor(colisionColor);
+		}
+
+		//Colision PLayerAABB to Polygon
+		result = c2AABBtoPoly(aabb_player,&poly_NPC, NULL);
+		if (result)
+		{
+			std::cout << "Colision";
+			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
+			poly.setColor(colisionColor);
+		}
+
+		//Colision NPCAABB to polygon 
+		result = c2AABBtoPoly(aabb_npc, &poly_NPC, NULL);
+		if (result)
+		{
+			std::cout << "Colision";
+			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
+			poly.setColor(colisionColor);
 		}
 
 		// Clear screen
