@@ -11,6 +11,56 @@
 
 using namespace std;
 
+class Capsule {
+public: 
+	int m_radius;
+	int m_height;
+	sf::Vector2f m_position;
+	sf::RectangleShape shape1;
+	sf::CircleShape shape2;
+	sf::CircleShape shape3;
+
+	Capsule(int radius, int height, sf::Vector2f position)
+		: m_radius(radius),m_height(height), m_position(position),
+		shape1(sf::Vector2f(2 * radius, height)), shape2(radius), shape3(radius)
+
+	{
+		shape1.setPosition(m_position);
+		shape2.setPosition(sf::Vector2f(m_position.x, m_position.y - m_radius));
+		shape3.setPosition(sf::Vector2f(m_position.x, m_position.y + m_height - m_radius));
+	}
+
+	c2Capsule getC2Capsule()
+	{
+		c2Capsule cap;
+		c2v a;
+		c2v b;
+		a.x = m_position.x + m_radius;
+		a.y = m_position.y;
+		b.x = m_position.x + m_radius;
+		b.y = m_position.y + m_height;
+		cap.a = a;
+		cap.b = b;
+		cap.r = m_radius;
+		return cap;
+	}
+
+
+	void setColor(sf::Color color)
+	{
+		shape1.setFillColor(color);
+		shape2.setFillColor(color);
+		shape3.setFillColor(color);
+	}
+
+	void render(sf::RenderWindow& window)
+	{
+		window.draw(shape1);
+		window.draw(shape2);
+		window.draw(shape3);
+	}
+};
+
 int main()
 {
 	// Create the main window
@@ -65,29 +115,8 @@ int main()
 		npc.getAnimatedSprite().getGlobalBounds().height);
 
 	//Setup NPC Capsule 
-	c2Capsule cap_NPC;
-	int capsuleRadius = 50;
-	int capsuleHeight = 100;
-	sf::Vector2f capsulePosition(200,400);
-	
-		//C2
-	c2v capsulea;
-	c2v capsuleb;
-	capsulea.x = capsulePosition.x + capsuleRadius;
-	capsulea.y = capsulePosition.y;
-	capsuleb.x = capsulePosition.x + capsuleRadius;
-	capsuleb.y = capsulePosition.y + capsuleHeight;
-	cap_NPC.a = capsulea;
-	cap_NPC.b = capsuleb;
-	cap_NPC.r = capsuleRadius;
-
-		//Shapes
-	RectangleShape capsuleShape1Rect(sf::Vector2f(2 * capsuleRadius, capsuleHeight));
-	CircleShape capsuleShape2Circ(capsuleRadius);
-	CircleShape capsuleShape3Circ(capsuleRadius);
-	capsuleShape1Rect.setPosition(capsulePosition);
-	capsuleShape2Circ.setPosition(sf::Vector2f(capsulePosition.x, capsulePosition.y - capsuleRadius));
-	capsuleShape3Circ.setPosition(sf::Vector2f(capsulePosition.x, capsulePosition.y  + capsuleHeight - capsuleRadius));
+	Capsule capsuleNPC(50,100,sf::Vector2f(200,400));
+	c2Capsule cap_NPC = capsuleNPC.getC2Capsule();
 
 	//Setup Player AABB
 	c2AABB aabb_player;
@@ -162,9 +191,7 @@ int main()
 		);
 
 		// Update Capsule 
-		capsuleShape1Rect.setFillColor(goodColor);
-		capsuleShape2Circ.setFillColor(goodColor);
-		capsuleShape3Circ.setFillColor(goodColor);
+		capsuleNPC.setColor(goodColor);
 
 		// Process events
 		sf::Event event;
@@ -225,9 +252,7 @@ int main()
 			//colision 
 			std::cout << "Colision";
 			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
-			capsuleShape1Rect.setFillColor(colisionColor);
-			capsuleShape2Circ.setFillColor(colisionColor);
-			capsuleShape3Circ.setFillColor(colisionColor);
+			capsuleNPC.setColor(colisionColor);
 		}
 
 		//Colision NPCAABB to Capsule 
@@ -236,9 +261,7 @@ int main()
 		{
 			std::cout << "Colision";
 			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
-			capsuleShape1Rect.setFillColor(colisionColor);
-			capsuleShape2Circ.setFillColor(colisionColor);
-			capsuleShape3Circ.setFillColor(colisionColor);
+			capsuleNPC.setColor(colisionColor);
 		}
 
 		// Clear screen
@@ -255,9 +278,7 @@ int main()
 
 
 		//Draw the NPC Capsule
-		window.draw(capsuleShape1Rect);
-		window.draw(capsuleShape2Circ);
-		window.draw(capsuleShape3Circ);
+		capsuleNPC.render(window);
 
 		// Update the window
 		window.display();
