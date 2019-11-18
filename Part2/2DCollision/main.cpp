@@ -79,13 +79,6 @@ int main()
 	Circle circle1(sf::Vector2f(600, 300), 50);
 	c2Circle circle_NPC = circle1.getC2Circle();
 
-	/*
-	//Setup Player AABB
-	c2AABB aabb_player;
-	aabb_player.min = c2V(player.getAnimatedSprite().getPosition().x, player.getAnimatedSprite().getPosition().y);
-	aabb_player.max = c2V(player.getAnimatedSprite().getGlobalBounds().width / 6, player.getAnimatedSprite().getGlobalBounds().width / 6);
-	*/
-
 	// Initialize Input
 	Input input;
 
@@ -210,30 +203,7 @@ int main()
 		npc.update();
 
 		// Check for collisions
-		/*/
-		// Colision AABBtoAABB
-		result = c2AABBtoAABB(aabb_player, aabb_npc);
-		cout << ((result != 0) ? ("Collision") : "") << endl;
-		if (result){
-			//colision
-			player.getAnimatedSprite().setColor(sf::Color(255,0,0));
-			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
-		}
-		else {
-			player.getAnimatedSprite().setColor(sf::Color(0, 255, 0));
-		}
 		
-		//Colision  PlayerAABB to Capsule
-		result = c2AABBtoCapsule(aabb_player, cap_NPC);
-		if (result)
-		{
-			//colision 
-			std::cout << "Colision";
-			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
-			capsuleNPC.setColor(colisionColor);
-		}
-		*/
-
 		//Colision NPCAABB to Capsule 
 		result = c2AABBtoCapsule(aabb_npc, cap_NPC);
 		if (result)
@@ -243,16 +213,6 @@ int main()
 			capsuleNPC.setColor(colisionColor);
 		}
 
-		/*
-		//Colision PLayerAABB to Polygon
-		result = c2AABBtoPoly(aabb_player,&poly_NPC, NULL);
-		if (result)
-		{
-			std::cout << "Colision";
-			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
-			poly.setColor(colisionColor);
-		}
-		*/
 		//Colision NPCAABB to polygon 
 		result = c2AABBtoPoly(aabb_npc, &poly_NPC, NULL);
 		if (result)
@@ -261,16 +221,7 @@ int main()
 			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
 			poly.setColor(colisionColor);
 		}
-		/*
-		//Colision PLayerAABB to Ray
-		result = c2RaytoAABB(ray1_NPC,aabb_player, ptr_rayResult);
-		if (result)
-		{
-			std::cout << "Colision";
-			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
-			ray1.setColor(colisionColor);
-		}
-		*/
+
 		//Colision NPCAABB to Ray 
 		result = c2RaytoAABB(ray1_NPC, aabb_npc, ptr_rayResult);
 		if (result)
@@ -279,16 +230,7 @@ int main()
 			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
 			ray1.setColor(colisionColor);
 		}
-		/*
-		//Colision PLayerAABB to Circle
-		result = c2CircletoAABB(circle_NPC,aabb_player);
-		if (result)
-		{
-			std::cout << "Colision";
-			player.getAnimatedSprite().setColor(sf::Color(255, 0, 0));
-			circle1.setColor(colisionColor);
-		}
-		*/
+
 		//Colision NPCAABB to Circle 
 		result = c2CircletoAABB(circle_NPC, aabb_npc);
 		if (result)
@@ -298,33 +240,38 @@ int main()
 			circle1.setColor(colisionColor);
 		}
 
-		//Colision 
+		//Colision with player
 		if (player.colideWithAABB(aabb_npc))
 		{
+			std::cout << "Colision";
 			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
 			player.hit();
 		}
 
 		if (player.colideWithCapsule(capsuleNPC))
 		{
+			std::cout << "Colision";
 			capsuleNPC.setColor(colisionColor);
 			player.hit();
 		}
 
 		if (player.colideWithCircle(circle1))
 		{
+			std::cout << "Colision";
 			circle1.setColor(colisionColor);
 			player.hit();
 		}
 
 		if (player.colideWithPolygon(poly))
 		{
+			std::cout << "Colision";
 			poly.setColor(colisionColor);
 			player.hit();
 		}
 
 		if (player.colideWithRay(ray1))
 		{
+			std::cout << "Colision";
 			ray1.setColor(colisionColor);
 			player.hit();
 		}
