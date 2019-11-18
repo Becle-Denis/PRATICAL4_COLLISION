@@ -218,7 +218,7 @@ int main()
 			player.getAnimatedSprite().setColor(sf::Color(0, 255, 0));
 		}
 
-		//Colision  PlayerAABBtoCapsule
+		//Colision  PlayerAABB to Capsule
 		result = c2AABBtoCapsule(aabb_player, cap_NPC);
 		if (result)
 		{
@@ -230,7 +230,16 @@ int main()
 			capsuleShape3Circ.setFillColor(colisionColor);
 		}
 
-
+		//Colision NPCAABB to Capsule 
+		result = c2AABBtoCapsule(aabb_npc, cap_NPC);
+		if (result)
+		{
+			std::cout << "Colision";
+			bondingRectangleNPC.setOutlineColor(sf::Color::Magenta);
+			capsuleShape1Rect.setFillColor(colisionColor);
+			capsuleShape2Circ.setFillColor(colisionColor);
+			capsuleShape3Circ.setFillColor(colisionColor);
+		}
 
 		// Clear screen
 		window.clear();
