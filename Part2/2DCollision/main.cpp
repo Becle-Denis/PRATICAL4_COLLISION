@@ -101,6 +101,33 @@ public:
 	}
 };
 
+class Ray
+{
+	RectangleShape shape;
+	float m_length;
+	float m_rotation;
+	
+
+public:
+	Ray(sf::Vector2f position,float length, float rotation) : 
+		m_length(length), m_rotation(rotation), shape(sf::Vector2f(length,1))
+	{
+		shape.setPosition(position);
+		shape.rotate(rotation);
+	}
+
+
+	void setColor(sf::Color color)
+	{
+		shape.setFillColor(color);
+	}
+
+	void render(sf::RenderWindow& window)
+	{
+		window.draw(shape);
+	}
+};
+
 
 int main()
 {
@@ -162,6 +189,9 @@ int main()
 	//Setup NPC Polygon
 	Polygon poly({ sf::Vector2f(100,210),sf::Vector2f(253,300),sf::Vector2f(222,212) });
 	c2Poly poly_NPC = poly.getC2Poly();
+
+	//Setup the NPC Ray
+	Ray ray(sf::Vector2f(500,50),200,30);
 
 	//Setup Player AABB
 	c2AABB aabb_player;
@@ -240,6 +270,9 @@ int main()
 
 		// Update Polyone 
 		poly.setColor(goodColor);
+
+		// Update Ray
+		ray.setColor(goodColor);
 
 		// Process events
 		sf::Event event;
@@ -347,6 +380,9 @@ int main()
 
 		//draw the NPC polygon
 		poly.render(window);
+
+		//draw the NPC Ray
+		ray.render(window);
 
 		// Update the window
 		window.display();
